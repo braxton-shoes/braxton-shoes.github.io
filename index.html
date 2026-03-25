@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAXTON Legacy | Офіційний магазин</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: #fcfcfc; color: #333; line-height: 1.6; }
+        
+        /* Шапка сайту */
+        header { background-color: #1a1a1a; color: #fff; padding: 25px 0; text-align: center; font-size: 28px; font-weight: bold; letter-spacing: 4px; text-transform: uppercase; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        header span { color: #b17b44; }
+
+        /* Банер / Герой секція */
+        .hero { background: linear-gradient(rgba(17, 17, 17, 0.7), rgba(17, 17, 17, 0.7)), url('https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=2000&auto=format&fit=crop') center/cover; color: white; text-align: center; padding: 80px 20px; margin-bottom: 40px; }
+        .hero h1 { font-size: 40px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
+        .hero p { font-size: 18px; color: #ddd; max-width: 600px; margin: 0 auto; }
+
+        /* Секція каталогу */
+        .catalog-container { max-width: 1200px; margin: 0 auto 60px; padding: 0 20px; }
+        .section-title { text-align: center; font-size: 32px; color: #111; margin-bottom: 40px; text-transform: uppercase; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: #b17b44; margin: 15px auto 0; }
+
+        /* Сітка товарів */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        
+        /* Картка товару */
+        .card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; display: flex; flex-direction: column; border: 1px solid #eee; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-color: #b17b44; }
+        
+        .card-img-wrapper { width: 100%; aspect-ratio: 4/5; overflow: hidden; background: #f8f8f8; position: relative; }
+        .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .card:hover .card-img-wrapper img { transform: scale(1.05); }
+        
+        /* Лейбл "Хіт" або "Новинка" */
+        .badge { position: absolute; top: 15px; right: 15px; background: #111; color: #fff; padding: 5px 10px; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; }
+        .badge.hot { background: #b17b44; }
+
+        .card-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-title { font-size: 18px; color: #111; font-weight: 600; margin-bottom: 10px; line-height: 1.3; }
+        .card-price { font-size: 20px; color: #b17b44; font-weight: bold; margin-bottom: 15px; margin-top: auto; }
+        
+        .card-btn { background: #111; color: #fff; text-align: center; padding: 12px; border-radius: 6px; font-weight: bold; text-transform: uppercase; font-size: 14px; transition: 0.3s; }
+        .card:hover .card-btn { background: #b17b44; }
+
+        /* Футер */
+        footer { background-color: #1a1a1a; color: #fff; padding: 40px 20px; text-align: center; margin-top: auto; }
+        footer p { color: #888; font-size: 14px; margin-bottom: 10px; }
+
+        @media (max-width: 768px) {
+            .hero { padding: 50px 20px; }
+            .hero h1 { font-size: 30px; }
+            .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+            .card-info { padding: 15px; }
+            .card-title { font-size: 15px; }
+            .card-price { font-size: 16px; }
+            .card-btn { padding: 10px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>BRAXTON <span>Legacy</span></header>
+
+    <div class="hero">
+        <h1>Взуття з характером</h1>
+        <p>Висока якість, натуральні матеріали та ручна робота. Оберіть свою ідеальну пару.</p>
+    </div>
+
+    <div class="catalog-container">
+        <h2 class="section-title">Каталог</h2>
+        
+        <div class="grid">
+            
+            <a href="./mocasins352/" class="card">
+                <div class="card-img-wrapper">
+                    <div class="badge hot">Хіт продажу</div>
+                    <img src="mocasins352/latte_1.jpg" alt="Мокасини з перфорацією" onerror="this.src='https://images.unsplash.com/photo-1614252339460-e17635634629?q=80&w=800&auto=format&fit=crop'">
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Літні чоловічі мокасини (з перфорацією)</div>
+                    <div class="card-price">2550 ₴</div>
+                    <div class="card-btn">Детальніше</div>
+                </div>
+            </a>
+
+            <a href="#" class="card">
+                <div class="card-img-wrapper">
+                    <div class="badge">Новинка</div>
+                    <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop" alt="Туфлі класичні">
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Класичні шкіряні туфлі Оксфорд</div>
+                    <div class="card-price">2800 ₴</div>
+                    <div class="card-btn">Детальніше</div>
+                </div>
+            </a>
+
+            <a href="#" class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1638247025967-b4e38f787b76?q=80&w=800&auto=format&fit=crop" alt="Челсі">
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Замшеві черевики Челсі</div>
+                    <div class="card-price">3100 ₴</div>
+                    <div class="card-btn">Детальніше</div>
+                </div>
+            </a>
+
+            <a href="#" class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1520639888713-7851133b1ed0?q=80&w=800&auto=format&fit=crop" alt="Кеди">
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Повсякденні шкіряні кеди</div>
+                    <div class="card-price">2400 ₴</div>
+                    <div class="card-btn">Детальніше</div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>BRAXTON Legacy — сила традиції.</p>
+        <p>Доставка по всій Україні • Оплата при отриманні</p>
+    </footer>
+
+</body>
+</html>
