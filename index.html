@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BRAXTON Legacy | Офіційний магазин</title>
+    <title>BRAXTON Legacy | Офіційний каталог</title>
+    
+    <!-- Підключення шрифта Montserrat для преміального вигляду -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
     !function(f,b,e,v,n,t,s)
@@ -28,92 +33,104 @@
     }(window, document, 'ttq');
     </script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background-color: #fcfcfc; color: #333; line-height: 1.6; }
         
         /* Шапка сайту */
-        header { background-color: #1a1a1a; color: #fff; padding: 25px 0; text-align: center; font-size: 28px; font-weight: bold; letter-spacing: 4px; text-transform: uppercase; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        header { background-color: #1a1a1a; color: #fff; padding: 22px 0; text-align: center; font-size: 26px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         header span { color: #b17b44; }
 
         /* Банер / Герой секція */
-        .hero { background: linear-gradient(rgba(17, 17, 17, 0.7), rgba(17, 17, 17, 0.7)), url('https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=2000&auto=format&fit=crop') center/cover; color: white; text-align: center; padding: 80px 20px; margin-bottom: 40px; }
-        .hero h1 { font-size: 40px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
-        .hero p { font-size: 18px; color: #ddd; max-width: 600px; margin: 0 auto; }
+        .hero { background: linear-gradient(rgba(17, 17, 17, 0.75), rgba(17, 17, 17, 0.75)), url('https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=2000&auto=format&fit=crop') center/cover; color: white; text-align: center; padding: 100px 20px; margin-bottom: 50px; }
+        .hero h1 { font-size: 42px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
+        .hero p { font-size: 18px; color: #eee; max-width: 600px; margin: 0 auto; font-weight: 400; line-height: 1.8; }
 
         /* Секція каталогу */
         .catalog-container { max-width: 1200px; margin: 0 auto 60px; padding: 0 20px; }
-        .section-title { text-align: center; font-size: 32px; color: #111; margin-bottom: 40px; text-transform: uppercase; }
-        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: #b17b44; margin: 15px auto 0; }
+        .section-title { text-align: center; font-size: 32px; font-weight: 800; color: #111; margin-bottom: 40px; text-transform: uppercase; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: #b17b44; margin: 15px auto 0; border-radius: 2px; }
 
         /* Сітка товарів */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
         
         /* Картка товару */
-        .card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; display: flex; flex-direction: column; border: 1px solid #eee; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-color: #b17b44; }
+        .card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; display: flex; flex-direction: column; border: 1px solid #f0f0f0; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); border-color: #e0e0e0; }
         
         .card-img-wrapper { width: 100%; aspect-ratio: 4/5; overflow: hidden; background: #fff; position: relative; padding: 15px; }
-        .card-img-wrapper img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.5s; }
-        .card:hover .card-img-wrapper img { transform: scale(1.05); }
+        .card-img-wrapper img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.5s ease; }
+        .card:hover .card-img-wrapper img { transform: scale(1.08); }
         
         /* Лейбл "Хіт" або "Новинка" */
-        .badge { position: absolute; top: 15px; right: 15px; background: #111; color: #fff; padding: 5px 10px; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; z-index: 10; }
-        .badge.hot { background: #b17b44; }
+        .badge { position: absolute; top: 15px; right: 15px; background: #111; color: #fff; padding: 6px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .badge.hot { background: #d32f2f; }
 
-        .card-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; border-top: 1px solid #f0f0f0; }
-        .card-title { font-size: 18px; color: #111; font-weight: 600; margin-bottom: 10px; line-height: 1.3; }
-        .card-price { font-size: 20px; color: #b17b44; font-weight: bold; margin-bottom: 15px; margin-top: auto; }
+        .card-info { padding: 25px 20px; display: flex; flex-direction: column; flex-grow: 1; border-top: 1px solid #f9f9f9; }
+        .card-title { font-size: 17px; color: #111; font-weight: 700; margin-bottom: 12px; line-height: 1.4; }
         
-        .card-btn { background: #111; color: #fff; text-align: center; padding: 12px; border-radius: 6px; font-weight: bold; text-transform: uppercase; font-size: 14px; transition: 0.3s; }
+        /* Блок ціни */
+        .card-price-container { display: flex; align-items: baseline; gap: 10px; margin-bottom: 20px; margin-top: auto; }
+        .card-old-price { font-size: 15px; color: #999; text-decoration: line-through; font-weight: 500; }
+        .card-price { font-size: 22px; color: #d32f2f; font-weight: 800; }
+        
+        .card-btn { background: #111; color: #fff; text-align: center; padding: 14px; border-radius: 8px; font-weight: 700; text-transform: uppercase; font-size: 14px; transition: 0.3s; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .card:hover .card-btn { background: #b17b44; }
 
         /* Переваги та Зв'язок */
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 60px auto; padding: 0 20px; }
-        .feature-box { text-align: center; padding: 40px 20px; background: #fff; border-radius: 10px; border: 1px solid #eee; transition: 0.3s; }
-        .feature-box:hover { transform: translateY(-5px); border-color: #b17b44; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .feature-icon { font-size: 45px; margin-bottom: 20px; }
-        .feature-title { font-size: 18px; font-weight: bold; margin-bottom: 12px; color: #111; text-transform: uppercase; letter-spacing: 1px; }
-        .feature-desc { font-size: 15px; color: #666; line-height: 1.6; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 70px auto; padding: 0 20px; }
+        .feature-box { text-align: center; padding: 40px 25px; background: #fff; border-radius: 12px; border: 1px solid #f0f0f0; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .feature-box:hover { transform: translateY(-5px); border-color: #eedccb; box-shadow: 0 10px 25px rgba(177,123,68,0.1); }
+        .feature-icon { font-size: 45px; margin-bottom: 20px; display: inline-block; }
+        .feature-title { font-size: 18px; font-weight: 800; margin-bottom: 12px; color: #111; text-transform: uppercase; letter-spacing: 1px; }
+        .feature-desc { font-size: 15px; color: #666; line-height: 1.7; font-weight: 500; }
 
-        .contact-block { max-width: 800px; margin: 40px auto 80px; background: #fafafa; padding: 40px 20px; border-radius: 12px; text-align: center; border: 2px dashed #eedccb; }
-        .contact-block h3 { color: #111; font-size: 24px; margin-bottom: 15px; text-transform: uppercase; }
-        .contact-block p { color: #555; margin-bottom: 25px; font-size: 16px; }
-        .contact-cta { font-size: 20px; font-weight: bold; background: #fff; display: inline-block; padding: 25px 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
-        .contact-phone { display: block; color: #111; text-decoration: none; font-size: 26px; margin-bottom: 10px; transition: 0.3s; }
+        .contact-block { max-width: 800px; margin: 40px auto 80px; background: #fdfaf6; padding: 45px 20px; border-radius: 16px; text-align: center; border: 2px dashed #eedccb; box-shadow: 0 10px 30px rgba(177,123,68,0.05); }
+        .contact-block h3 { color: #111; font-size: 26px; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; }
+        .contact-block p { color: #555; margin-bottom: 25px; font-size: 16px; font-weight: 500; }
+        .contact-cta { font-size: 20px; font-weight: bold; background: #fff; display: inline-block; padding: 25px 40px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); border: 1px solid #eee; }
+        .contact-phone { display: block; color: #111; text-decoration: none; font-size: 28px; font-weight: 800; margin-bottom: 15px; transition: 0.3s; }
         .contact-phone:hover { color: #b17b44; }
-        .contact-tg { display: inline-block; color: #fff; background: #2AABEE; text-decoration: none; font-size: 16px; padding: 10px 25px; border-radius: 20px; font-weight: normal; transition: 0.3s; }
-        .contact-tg:hover { background: #1c92d2; transform: scale(1.05); }
+        .contact-tg { display: inline-flex; align-items: center; gap: 8px; color: #fff; background: #2AABEE; text-decoration: none; font-size: 16px; padding: 12px 25px; border-radius: 30px; font-weight: 600; transition: 0.3s; box-shadow: 0 4px 15px rgba(42, 171, 238, 0.3); }
+        .contact-tg:hover { background: #1c92d2; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(42, 171, 238, 0.4); }
 
         /* Історія бренду з галереєю */
-        .brand-story { background: #1a1a1a; color: #fff; padding: 80px 20px; margin-top: 60px; }
-        .brand-story-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 50px; align-items: center; }
+        .brand-story { background: #1a1a1a; color: #fff; padding: 90px 20px; margin-top: 60px; position: relative; overflow: hidden; }
+        .brand-story-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 60px; align-items: center; position: relative; z-index: 2; }
         .brand-story-text { flex: 1 1 500px; text-align: left; }
-        .brand-story-text h2 { color: #b17b44; font-size: 32px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
-        .brand-story-text p { font-size: 17px; line-height: 1.8; color: #ccc; margin-bottom: 20px; }
+        .brand-story-text h2 { color: #b17b44; font-size: 34px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+        .brand-story-text p { font-size: 17px; line-height: 1.9; color: #dcdcdc; margin-bottom: 20px; }
         
         .brand-story-gallery { flex: 1 1 500px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .brand-story-gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; aspect-ratio: 1/1; opacity: 0.85; transition: 0.4s; filter: grayscale(20%); }
-        .brand-story-gallery img:hover { opacity: 1; transform: scale(1.03); filter: grayscale(0%); box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 2; position: relative; }
+        .brand-story-gallery img:hover { opacity: 1; transform: scale(1.03); filter: grayscale(0%); box-shadow: 0 10px 30px rgba(0,0,0,0.6); z-index: 2; position: relative; border-radius: 12px; }
         .brand-story-gallery img:first-child { grid-column: span 2; aspect-ratio: 21/9; }
 
         /* Футер */
-        footer { background-color: #1a1a1a; color: #fff; padding: 40px 20px; text-align: center; margin-top: auto; border-top: 1px solid #333; }
-        footer p { color: #888; font-size: 14px; margin-bottom: 10px; }
+        footer { background-color: #111; color: #fff; padding: 40px 20px; text-align: center; margin-top: auto; border-top: 1px solid #222; }
+        footer p { color: #888; font-size: 14px; margin-bottom: 10px; font-weight: 500; }
 
         @media (max-width: 768px) {
-            .hero { padding: 50px 20px; }
-            .hero h1 { font-size: 30px; }
+            header { font-size: 22px; padding: 18px 0; }
+            .hero { padding: 60px 20px; }
+            .hero h1 { font-size: 28px; }
             .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
             .card-info { padding: 15px; }
-            .card-title { font-size: 15px; }
-            .card-price { font-size: 16px; }
-            .card-btn { padding: 10px; font-size: 12px; }
+            .card-title { font-size: 14px; margin-bottom: 8px; }
+            .card-price-container { flex-direction: column; gap: 2px; align-items: flex-start; margin-bottom: 12px; }
+            .card-price { font-size: 18px; }
+            .card-old-price { font-size: 12px; }
+            .card-btn { padding: 12px; font-size: 12px; }
             .card-img-wrapper { aspect-ratio: 1/1; padding: 10px; }
-            .contact-cta { padding: 20px; width: 100%; }
-            .contact-phone { font-size: 22px; }
+            .badge { font-size: 10px; padding: 4px 8px; top: 10px; right: 10px; }
+            .contact-cta { padding: 25px 15px; width: 100%; }
+            .contact-phone { font-size: 24px; }
             .brand-story-text { text-align: center; }
             .brand-story-gallery img:first-child { aspect-ratio: 16/9; }
         }
+        
+        /* Анімація завантаження цін */
+        .loading-price { opacity: 0.5; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
     </style>
 </head>
 <body>
@@ -126,53 +143,64 @@
     </div>
 
     <div class="catalog-container">
-        <h2 class="section-title">Каталог</h2>
+        <h2 class="section-title">Каталог моделей</h2>
         
         <div class="grid">
             
-            <a href="https://braxton-shoes.github.io/mocasins352/?v=1" class="card">
+            <!-- Карткам додано атрибут data-auto-price="true" -->
+            <a href="https://braxton-shoes.github.io/mocasins352/?v=1" class="card" data-auto-price="true">
                 <div class="card-img-wrapper">
                     <div class="badge hot">Хіт літа</div>
                     <img src="https://braxton-shoes.github.io/mocasins352/latte_1.jpg" alt="Літні чоловічі мокасини (з перфорацією)">
                 </div>
                 <div class="card-info">
                     <div class="card-title">Літні чоловічі мокасини (з перфорацією)</div>
-                    <div class="card-price">2550 ₴</div>
-                    <div class="card-btn">Детальніше</div>
+                    <div class="card-price-container loading-price">
+                        <!-- Дефолтні ціни на випадок, якщо скрипт не встигне або не зможе завантажити -->
+                        <span class="card-old-price">2800 ₴</span>
+                        <span class="card-price">2550 ₴</span>
+                    </div>
+                    <div class="card-btn">🛒 Детальніше</div>
                 </div>
             </a>
 
-            <a href="https://braxton-shoes.github.io/N352/?v=1" class="card">
+            <a href="https://braxton-shoes.github.io/N352/?v=1" class="card" data-auto-price="true">
                 <div class="card-img-wrapper">
                     <img src="https://braxton-shoes.github.io/N352/20250815_1001341.jpg" alt="Демісезонні чоловічі мокасини">
                 </div>
                 <div class="card-info">
                     <div class="card-title">Демісезонні чоловічі мокасини</div>
-                    <div class="card-price">2600 ₴</div>
-                    <div class="card-btn">Детальніше</div>
+                    <div class="card-price-container loading-price">
+                        <span class="card-price">2600 ₴</span>
+                    </div>
+                    <div class="card-btn">🛒 Детальніше</div>
                 </div>
             </a>
 
-            <a href="https://braxton-shoes.github.io/N342/" class="card">
+            <a href="https://braxton-shoes.github.io/N342/" class="card" data-auto-price="true">
                 <div class="card-img-wrapper">
                     <div class="badge">Класика</div>
                     <img src="https://braxton-shoes.github.io/N342/black_smooth_1.jpg" alt="Туфлі Braxton N342">
                 </div>
                 <div class="card-info">
                     <div class="card-title">Туфлі Braxton з натуральної шкіри та замші</div>
-                    <div class="card-price">2600 ₴</div>
-                    <div class="card-btn">Детальніше</div>
+                    <div class="card-price-container loading-price">
+                        <span class="card-price">2600 ₴</span>
+                    </div>
+                    <div class="card-btn">🛒 Детальніше</div>
                 </div>
             </a>
 
-            <a href="https://braxton-shoes.github.io/N344/" class="card">
+            <a href="https://braxton-shoes.github.io/N344/" class="card" data-auto-price="true">
                 <div class="card-img-wrapper">
                     <img src="https://braxton-shoes.github.io/N344/DSC_0333.jpg" alt="Замшеві туфлі Braxton N344">
                 </div>
                 <div class="card-info">
                     <div class="card-title">Туфлі Braxton з натуральної замші N344</div>
-                    <div class="card-price">2600 ₴</div>
-                    <div class="card-btn">Детальніше</div>
+                    <div class="card-price-container loading-price">
+                        <span class="card-price">2600 ₴</span>
+                    </div>
+                    <div class="card-btn">🛒 Детальніше</div>
                 </div>
             </a>
 
@@ -201,7 +229,7 @@
         <h3>Потрібна допомога з розміром?</h3>
         <p>Ми завжди на зв'язку. Менеджер проконсультує щодо моделей та допоможе підібрати ідеальну пару.</p>
         <div class="contact-cta">
-            <span style="display: block; font-size: 14px; color: #666; font-weight: normal; margin-bottom: 5px; text-transform: uppercase;">Телефон менеджера:</span>
+            <span style="display: block; font-size: 13px; color: #888; font-weight: 700; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Телефон менеджера:</span>
             <a href="tel:+380935523744" class="contact-phone">+380 93 552 37 44</a>
             <a href="https://t.me/+380935523744" target="_blank" class="contact-tg">💬 Написати в Telegram</a>
         </div>
@@ -212,12 +240,12 @@
             <div class="brand-story-text">
                 <h2>Braxton Legacy</h2>
                 <p>Ми не просто шиємо взуття. Ми створюємо продукт, який говорить сам за себе. Наша філософія проста: чоловіче взуття має бути надійним, стильним і неймовірно комфортним з першої секунди.</p>
-                <p>Кожна пара проходить через руки наших майстрів, які знають і люблять свою справу: від ретельного відбору натуральної шкіри до ідеально рівних швів. Вибираючи Braxton, ви обираєте силу української традиції.</p>
+                <p>Кожна pair проходить через руки наших майстрів, які знають і люблять свою справу: від ретельного відбору натуральної шкіри до ідеально рівних швів. Вибираючи Braxton, ви обираєте силу української традиції.</p>
             </div>
             <div class="brand-story-gallery">
-                <img src="craft1.jpg" alt="Виробництво Braxton">
-                <img src="craft2.jpg" alt="Деталі роботи">
-                <img src="craft3.jpg" alt="Шкіра для взуття">
+                <img src="craft1.jpg" alt="Виробництво Braxton" onerror="this.style.display='none'">
+                <img src="craft2.jpg" alt="Деталі роботи" onerror="this.style.display='none'">
+                <img src="craft3.jpg" alt="Шкіра для взуття" onerror="this.style.display='none'">
             </div>
         </div>
     </div>
@@ -227,5 +255,56 @@
         <p>Доставка по всій Україні • Оплата при отриманні</p>
     </footer>
 
+    <!-- Скрипт для автоматичного парсингу цін з лендінгів -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll('.card[data-auto-price="true"]');
+
+            cards.forEach(async (card) => {
+                const targetUrl = card.getAttribute('href');
+                if (!targetUrl) return;
+
+                const priceContainer = card.querySelector('.card-price-container');
+
+                try {
+                    // Робимо фоновий запит на сторінку товару
+                    const response = await fetch(targetUrl);
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    
+                    const htmlText = await response.text();
+                    
+                    // Парсимо HTML сторінки товару
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(htmlText, 'text/html');
+
+                    // Шукаємо блок з ціною на лендінгу (беремо перший знайдений)
+                    const fetchedPriceEl = doc.querySelector('.price');
+                    const fetchedOldPriceEl = doc.querySelector('.old-price');
+
+                    if (fetchedPriceEl) {
+                        let newHTML = '';
+                        
+                        // Якщо на лендінгу є стара ціна (знижка)
+                        if (fetchedOldPriceEl && fetchedOldPriceEl.textContent.trim() !== '') {
+                            newHTML += `<span class="card-old-price">${fetchedOldPriceEl.textContent}</span>\n`;
+                        }
+                        
+                        // Додаємо актуальну ціну
+                        newHTML += `<span class="card-price">${fetchedPriceEl.textContent}</span>`;
+                        
+                        // Оновлюємо DOM
+                        priceContainer.innerHTML = newHTML;
+                        
+                        // Знімаємо анімацію завантаження
+                        priceContainer.classList.remove('loading-price');
+                    }
+                } catch (error) {
+                    console.error('Не вдалося оновити ціну для:', targetUrl, error);
+                    // Якщо помилка (наприклад проблеми з мережею), залишаємо ціну, яка прописана жорстко в HTML
+                    if(priceContainer) priceContainer.classList.remove('loading-price');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
