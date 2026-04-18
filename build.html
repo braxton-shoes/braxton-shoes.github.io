@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>PARA | Конструктор Головної Сторінки</title>
+    <style>
+        body { font-family: sans-serif; padding: 40px; background: #f4f4f4; line-height: 1.6; }
+        .box { max-width: 800px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        h1 { border-bottom: 2px solid #b17b44; padding-bottom: 10px; text-transform: uppercase; font-size: 22px; }
+        textarea { width: 100%; height: 100px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+        .btn { background: #111; color: #fff; padding: 15px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 20px; width: 100%; }
+        .btn:hover { background: #b17b44; }
+        #status { margin-top: 20px; font-weight: bold; color: #d32f2f; }
+        .hidden-result { display: none; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>Авто-Генератор Каталогу PARA</h1>
+    <p>Введіть назви папок через кому (наприклад: <code>319, N342, N344, N352, mocasins352</code>):</p>
+    <textarea id="foldersInput" placeholder="319, N342, N344, N352, mocasins352"></textarea>
+    <button class="btn" onclick="buildCatalog()">⚡ ЗІБРАТИ ВІТРИНУ (АВТОМАТИЧНО)</button>
+    <div id="status"></div>
+
+    <div id="resultArea" class="hidden-result">
+        <h3>Готово! Скопіюйте код нижче та збережіть як index.html:</h3>
+        <button class="btn" style="background: #27ae60;" onclick="copyResult()">📋 Скопіювати код</button>
+        <textarea id="finalCode" style="height: 300px; margin-top: 15px;"></textarea>
+    </div>
+</div>
+
+<script>
+    async function buildCatalog() {
+        const input = document.getElementById('foldersInput').value;
+        const status = document.getElementById('status');
+        const folders = input.split(',').map(f => f.trim()).filter(f => f !== "");
+        
+        if (folders.length === 0) {
+            status.innerText = "⚠️ Введіть хоча б одну папку!";
+            return;
+        }
+
+        status.style.color = "#b17b44";
+        status.innerText = "⏳ Аналізую ваші сайти... зачекайте...";
+
+        let allCardsHTML = "";
+
+        for (const folder of folders) {
+            try {
+                const response = await fetch(`./${folder}/index.html`);
+                if (!response.ok) throw new Error("Не знайдено");
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+
+                // 1. Беремо назву моделі з H1
+                const modelName = doc.querySelector('h1') ? doc.querySelector('h1').innerText.trim() : "Мокасини PARA";
+
+                // 2. Шукаємо всі кольори через JS об'єкт або кружечки
+                // Нам потрібен список: { name: 'Колір', key: 'color_0', img: 'photo1.jpg' }
+                const variants = [];
+                
+                // Витягуємо productImages з тексту скрипта
+                const jsText = html.match(/const productImages = \{([\s\S]*?)\};/);
+                if (jsText) {
+                    const imgData = {};
+                    const imgLines = jsText[1].split('\n');
+                    imgLines.forEach(line => {
+                        const match = line.match(/'(color_\d+)':\s*\[\s*'([^']+)'/);
+                        if (match) imgData[match[1]] = match[2];
+                    });
+
+                    // Шукаємо назви кольорів у кружечках
+                    const circles = doc.querySelectorAll('.color-circle');
+                    circles.forEach(circle => {
+                        const onclick = circle.getAttribute('onclick');
+                        const match = onclick.match(/selectColor\('([^']+)',\s*'([^']+)'\)/);
+                        if (match) {
+                            const key = match[2];
+                            variants.push({
+                                fullName: match[1],
+                                shortName: circle.getAttribute('title') || match[1],
+                                key: key,
+                                firstImg: imgData[key] || ""
+                            });
+                        }
+                    });
+                }
+
+                // 3. Генеруємо картки для кожного кольору
+                variants.forEach(v => {
+                    allCardsHTML += `
+            <a href="${folder}/?v=${parseInt(v.key.split('_')[1]) + 1}" class="card" data-folder="${folder}">
+                <div class="card-img-wrapper">
+                    <img src="${folder}/${v.firstImg}" alt="${modelName}" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
+                </div>
+                <div class="card-info">
+                    <div class="card-title">${modelName}</div>
+                    <div class="card-color">Колір: ${v.shortName}</div>
+                    <div class="card-price-container loading-price"></div>
+                    <div class="card-btn">Детальніше</div>
+                </div>
+            </a>`;
+                });
+
+            } catch (e) {
+                console.error("Помилка в папці " + folder, e);
+            }
+        }
+
+        // Збираємо фінальний файл
+        const finalHTML = generateFullLayout(allCardsHTML);
+        document.getElementById('finalCode').value = finalHTML;
+        document.getElementById('resultArea').style.display = 'block';
+        status.style.color = "#27ae60";
+        status.innerText = "✅ Каталог успішно зібрано!";
+    }
+
+    function generateFullLayout(cards) {
+        return `<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARA footwear | Офіційний каталог</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+        body { background-color: #fcfcfc; color: #333; line-height: 1.6; }
+        header { background-color: #1a1a1a; color: #fff; padding: 22px 0; text-align: center; font-size: 26px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        header span { color: #b17b44; }
+        .hero { background: linear-gradient(rgba(17, 17, 17, 0.75), rgba(17, 17, 17, 0.8)), url('https://images.unsplash.com/photo-1544211100-2fde60f1b53e?q=80&w=2000&auto=format&fit=crop') center/cover; color: white; text-align: center; padding: 80px 20px; }
+        .hero h1 { font-size: 38px; margin-bottom: 15px; text-transform: uppercase; font-weight: 800; }
+        .catalog-container { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.06); transition: 0.3s; text-decoration: none; display: flex; flex-direction: column; border: 1px solid #f0f0f0; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+        .card-img-wrapper { width: 100%; aspect-ratio: 4/5; overflow: hidden; background: #f9f9f9; padding: 15px; }
+        .card-img-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+        .card-info { padding: 20px; border-top: 1px solid #f9f9f9; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 16px; color: #111; font-weight: 700; margin-bottom: 5px; }
+        .card-color { font-size: 13px; color: #888; margin-bottom: 12px; }
+        .card-price-container { display: flex; align-items: baseline; gap: 10px; margin-top: auto; margin-bottom: 15px; }
+        .card-price { font-size: 22px; color: #d32f2f; font-weight: 800; }
+        .card-old-price { font-size: 15px; color: #999; text-decoration: line-through; }
+        .card-btn { background: #111; color: #fff; text-align: center; padding: 12px; border-radius: 6px; font-weight: 700; text-transform: uppercase; font-size: 13px; }
+        @media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; } }
+    </style>
+</head>
+<body>
+    <header>PARA <span>footwear</span></header>
+    <div class="hero"><h1>Офіційний каталог</h1></div>
+    <div class="catalog-container">
+        <div class="grid">${cards}</div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const priceCache = {};
+            document.querySelectorAll('.card').forEach(card => {
+                const folder = card.getAttribute('data-folder');
+                const targetUrl = folder + '/index.html';
+                const priceContainer = card.querySelector('.card-price-container');
+                if (priceCache[folder]) { applyPrice(priceContainer, priceCache[folder].newP, priceCache[folder].oldP); return; }
+                fetch(targetUrl).then(res => res.text()).then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const fetchedPriceEl = doc.querySelector('.price-new') || doc.querySelector('.st-new');
+                    const fetchedOldPriceEl = doc.querySelector('.price-old') || doc.querySelector('.st-old');
+                    if (fetchedPriceEl) {
+                        const newP = fetchedPriceEl.textContent;
+                        const oldP = fetchedOldPriceEl ? fetchedOldPriceEl.textContent : '';
+                        priceCache[folder] = { newP, oldP };
+                        applyPrice(priceContainer, newP, oldP);
+                    }
+                });
+            });
+            function applyPrice(container, newPrice, oldPrice) {
+                container.innerHTML = (oldPrice ? '<span class="card-old-price">'+oldPrice+'</span>' : '') + '<span class="card-price">'+newPrice+'</span>';
+            }
+        });
+    <\/script>
+</body>
+</html>`;
+    }
+
+    function copyResult() {
+        const copyText = document.getElementById("finalCode");
+        copyText.select();
+        document.execCommand("copy");
+        alert("Код скопійовано!");
+    }
+</script>
+
+</body>
+</html>
