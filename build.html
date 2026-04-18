@@ -22,7 +22,7 @@
 
 <div class="box">
     <h1>Конструктор Каталогу <span>PARA</span></h1>
-    <p>Вкажіть назви папок з моделями (наприклад: <code>319, N342, N344, N352, mocasins352</code>). Скрипт сам знайде назви, кольори та ціни.</p>
+    <p>Вкажіть назви папок з моделями (наприклад: <code>319, N342, N344, N352, mocasins352</code>). Скрипт сам знайде назви, кольори, ціни та згенерує друге фото для ефекту при наведенні.</p>
     
     <textarea id="foldersInput" placeholder="Введіть папки через кому..."></textarea>
     
@@ -100,10 +100,22 @@
                 }
 
                 variants.forEach(v => {
+                    // Логіка визначення другого фото
+                    let secondImg = v.firstImg;
+                    if (secondImg.includes('_1.')) {
+                        secondImg = secondImg.replace('_1.', '_2.');
+                    } else if (secondImg.includes('(1).')) {
+                        secondImg = secondImg.replace('(1).', '(2).');
+                    } else {
+                        // Якщо немає 1, просто додаємо _2 перед розширенням
+                        secondImg = secondImg.replace(/(\.[\w\d_-]+)$/i, '_2$1');
+                    }
+
                     allCardsHTML += `
             <a href="${folder}/?v=${parseInt(v.key.split('_')[1]) + 1}" class="card" data-folder="${folder}">
                 <div class="card-img-wrapper">
-                    <img src="${folder}/${v.firstImg}" alt="${modelName}" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
+                    <img src="${folder}/${v.firstImg}" class="img-primary" alt="${modelName}" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
+                    <img src="${folder}/${secondImg}" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
                 </div>
                 <div class="card-info">
                     <div class="card-title">${modelName}</div>
@@ -151,8 +163,15 @@
         .card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.06); transition: 0.3s; text-decoration: none; display: flex; flex-direction: column; border: 1px solid #f0f0f0; }
         .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
         
-        .card-img-wrapper { width: 100%; aspect-ratio: 4/5; overflow: hidden; background: #f9f9f9; padding: 15px; }
-        .card-img-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+        /* СТИЛІ ДЛЯ ДВОХ ФОТО */
+        .card-img-wrapper { position: relative; width: 100%; aspect-ratio: 4/5; overflow: hidden; background: #f9f9f9; padding: 15px; }
+        .card-img-wrapper img { width: 100%; height: 100%; object-fit: contain; transition: opacity 0.4s ease-in-out; }
+        
+        .img-primary { position: relative; opacity: 1; z-index: 1; }
+        .img-secondary { position: absolute; top: 15px; left: 15px; width: calc(100% - 30px) !important; height: calc(100% - 30px) !important; opacity: 0; z-index: 2; }
+        
+        .card:hover .img-primary:not(.keep-visible) { opacity: 0; }
+        .card:hover .img-secondary { opacity: 1; }
         
         .card-info { padding: 25px 20px; border-top: 1px solid #f9f9f9; flex-grow: 1; display: flex; flex-direction: column; }
         .card-title { font-size: 17px; color: #111; font-weight: 700; margin-bottom: 5px; min-height: 48px; display: flex; align-items: center; }
