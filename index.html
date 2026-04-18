@@ -14,16 +14,16 @@
         header { background-color: #1a1a1a; color: #fff; padding: 22px 0; text-align: center; font-size: 26px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         header span { color: #b17b44; }
 
-        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1449244445805-bc0c4101692d?q=80&w=2000&auto=format&fit=crop') center/cover; color: white; text-align: center; padding: 100px 20px; }
-        .hero h1 { font-size: 48px; margin-bottom: 10px; text-transform: uppercase; font-weight: 800; letter-spacing: 2px; }
+        .hero { text-align: center; padding: 60px 20px 20px; background-color: #fcfcfc; color: #111; }
+        .hero h1 { font-size: 38px; text-transform: uppercase; font-weight: 800; letter-spacing: 2px; position: relative; display: inline-block; }
+        .hero h1::after { content: ''; display: block; width: 60px; height: 4px; background: #b17b44; margin: 15px auto 0; border-radius: 2px; }
         
-        .catalog-container { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
+        .catalog-container { max-width: 1200px; margin: 40px auto 60px; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
         
         .card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.06); transition: 0.3s; text-decoration: none; display: flex; flex-direction: column; border: 1px solid #f0f0f0; }
         .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
         
-        /* СТИЛІ ДЛЯ ДВОХ ФОТО */
         .card-img-wrapper { position: relative; width: 100%; aspect-ratio: 4/5; overflow: hidden; background: #f9f9f9; padding: 15px; }
         .card-img-wrapper img { width: 100%; height: 100%; object-fit: contain; transition: opacity 0.4s ease-in-out; }
         
@@ -44,7 +44,6 @@
         .card-btn { background: #111; color: #fff; text-align: center; padding: 14px; border-radius: 8px; font-weight: 700; text-transform: uppercase; font-size: 14px; transition: 0.3s; }
         .card:hover .card-btn { background: #b17b44; }
 
-        /* БЛОК ПРО КОМПАНІЮ */
         .about-section { background: #1a1a1a; color: #fff; padding: 80px 20px; margin-top: 80px; }
         .about-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
         .about-inner h2 { font-size: 32px; font-weight: 800; color: #b17b44; margin-bottom: 20px; text-transform: uppercase; }
@@ -58,7 +57,7 @@
         .about-footer { margin-top: 50px; font-size: 20px; font-weight: 800; text-transform: uppercase; color: #b17b44; letter-spacing: 2px; }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 32px; }
+            .hero h1 { font-size: 28px; }
             .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .card-info { padding: 15px; }
             .card-title { font-size: 14px; min-height: 40px; }
@@ -162,7 +161,7 @@
             <a href="mocasins352/?v=8" class="card" data-folder="mocasins352">
                 <div class="card-img-wrapper">
                     <img src="mocasins352/DSC_0365.jpg" class="img-primary" alt="Літні чоловічі мокасини (з перфорацією)" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="mocasins352/DSC_0365_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
+                    <img src="mocasins352/DSC_0358.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
                 </div>
                 <div class="card-info">
                     <div class="card-title">Літні чоловічі мокасини (з перфорацією)</div>
@@ -174,7 +173,7 @@
             <a href="319/?v=1" class="card" data-folder="319">
                 <div class="card-img-wrapper">
                     <img src="319/319l (4).jpg" class="img-primary" alt="Чоловічі кеди за натуральної шкіри" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="319/319l (4)_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
+                    <img src="319/319l (5).jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
                 </div>
                 <div class="card-info">
                     <div class="card-title">Чоловічі кеди за натуральної шкіри</div>
@@ -198,7 +197,7 @@
             <a href="319/?v=3" class="card" data-folder="319">
                 <div class="card-img-wrapper">
                     <img src="319/319gz (3).jpg" class="img-primary" alt="Чоловічі кеди за натуральної шкіри" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="319/319gz (3)_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
+                    <img src="319/319gz (4).jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
                 </div>
                 <div class="card-info">
                     <div class="card-title">Чоловічі кеди за натуральної шкіри</div>
@@ -318,7 +317,7 @@
             <a href="N352/?v=1" class="card" data-folder="N352">
                 <div class="card-img-wrapper">
                     <img src="N352/20250815_1001341.jpg" class="img-primary" alt="Демісезонні чоловічі мокасини" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N352/20250815_1001341_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
+                    <img src="N352/20250815_0959391.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
                 </div>
                 <div class="card-info">
                     <div class="card-title">Демісезонні чоловічі мокасини</div>
@@ -330,7 +329,7 @@
             <a href="N352/?v=2" class="card" data-folder="N352">
                 <div class="card-img-wrapper">
                     <img src="N352/20250803_121005.jpg" class="img-primary" alt="Демісезонні чоловічі мокасини" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N352/20250803_121005_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
+                    <img src="N352/20250803_121451.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
                 </div>
                 <div class="card-info">
                     <div class="card-title">Демісезонні чоловічі мокасини</div>
@@ -342,7 +341,7 @@
             <a href="N352/?v=3" class="card" data-folder="N352">
                 <div class="card-img-wrapper">
                     <img src="N352/20250815_101839.jpg" class="img-primary" alt="Демісезонні чоловічі мокасини" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N352/20250815_101839_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
+                    <img src="N352/20250815_102213.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
                 </div>
                 <div class="card-info">
                     <div class="card-title">Демісезонні чоловічі мокасини</div>
@@ -354,7 +353,7 @@
             <a href="N352/?v=4" class="card" data-folder="N352">
                 <div class="card-img-wrapper">
                     <img src="N352/DSC_0350.jpg" class="img-primary" alt="Демісезонні чоловічі мокасини" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N352/DSC_0350_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
+                    <img src="N352/DSC_0351.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
                 </div>
                 <div class="card-info">
                     <div class="card-title">Демісезонні чоловічі мокасини</div>
@@ -366,7 +365,7 @@
             <a href="N344/?v=1" class="card" data-folder="N344">
                 <div class="card-img-wrapper">
                     <img src="N344/DSC_0333.jpg" class="img-primary" alt="Туфлі Braxton з натуральної шкіри та замші" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N344/DSC_0333_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
+                    <img src="N344/DSC_0334.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
                 </div>
                 <div class="card-info">
                     <div class="card-title">Туфлі Braxton з натуральної шкіри та замші</div>
