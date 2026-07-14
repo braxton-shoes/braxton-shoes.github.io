@@ -3,403 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PARA | Каталог</title>
+    <title>PARA footwear | Офіційний каталог</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
         body { background-color: #fcfcfc; color: #333; line-height: 1.6; }
-        
         header { background-color: #1a1a1a; color: #fff; padding: 22px 0; text-align: center; font-size: 26px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         header span { color: #b17b44; }
-
-        .hero { text-align: center; padding: 60px 20px 20px; background-color: #fcfcfc; color: #111; }
-        .hero h1 { font-size: 38px; text-transform: uppercase; font-weight: 800; letter-spacing: 2px; position: relative; display: inline-block; }
-        .hero h1::after { content: ''; display: block; width: 60px; height: 4px; background: #b17b44; margin: 15px auto 0; border-radius: 2px; }
-        
-        .catalog-container { max-width: 1200px; margin: 40px auto 60px; padding: 0 20px; }
+        .hero { background: linear-gradient(rgba(17, 17, 17, 0.75), rgba(17, 17, 17, 0.8)), url('https://images.unsplash.com/photo-1544211100-2fde60f1b53e?q=80&w=2000&auto=format&fit=crop') center/cover; color: white; text-align: center; padding: 80px 20px; }
+        .hero h1 { font-size: 38px; margin-bottom: 15px; text-transform: uppercase; font-weight: 800; }
+        .catalog-container { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-        
         .card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.06); transition: 0.3s; text-decoration: none; display: flex; flex-direction: column; border: 1px solid #f0f0f0; }
         .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
-        
-        .card-img-wrapper { position: relative; width: 100%; aspect-ratio: 4/5; overflow: hidden; background: #f9f9f9; padding: 15px; }
-        .card-img-wrapper img { width: 100%; height: 100%; object-fit: contain; transition: opacity 0.4s ease-in-out; }
-        
-        .img-primary { position: relative; opacity: 1; z-index: 1; }
-        .img-secondary { position: absolute; top: 15px; left: 15px; width: calc(100% - 30px) !important; height: calc(100% - 30px) !important; opacity: 0; z-index: 2; }
-        
-        .card:hover .img-primary:not(.keep-visible) { opacity: 0; }
-        .card:hover .img-secondary { opacity: 1; }
-        
-        .card-info { padding: 25px 20px; border-top: 1px solid #f9f9f9; flex-grow: 1; display: flex; flex-direction: column; }
-        .card-title { font-size: 17px; color: #111; font-weight: 700; margin-bottom: 5px; min-height: 48px; display: flex; align-items: center; }
-        .card-color { font-size: 13px; color: #888; margin-bottom: 15px; font-weight: 500; }
-        
-        .card-price-container { display: flex; align-items: baseline; gap: 10px; margin-top: auto; margin-bottom: 20px; min-height: 32px; }
-        .card-price { font-size: 24px; color: #d32f2f; font-weight: 800; }
-        .card-old-price { font-size: 16px; color: #999; text-decoration: line-through; }
-        
-        .card-btn { background: #111; color: #fff; text-align: center; padding: 14px; border-radius: 8px; font-weight: 700; text-transform: uppercase; font-size: 14px; transition: 0.3s; }
-        .card:hover .card-btn { background: #b17b44; }
-
-        .about-section { background: #1a1a1a; color: #fff; padding: 80px 20px; margin-top: 80px; }
-        .about-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
-        .about-inner h2 { font-size: 32px; font-weight: 800; color: #b17b44; margin-bottom: 20px; text-transform: uppercase; }
-        .about-main-text { font-size: 18px; font-weight: 600; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6; }
-        
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; text-align: left; }
-        .feature-item { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; border-left: 4px solid #b17b44; }
-        .feature-item h3 { font-size: 18px; margin-bottom: 15px; color: #b17b44; text-transform: uppercase; }
-        .feature-item p { font-size: 15px; color: #ccc; line-height: 1.7; }
-        
-        .about-footer { margin-top: 50px; font-size: 20px; font-weight: 800; text-transform: uppercase; color: #b17b44; letter-spacing: 2px; }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 28px; }
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .card-info { padding: 15px; }
-            .card-title { font-size: 14px; min-height: 40px; }
-            .about-inner h2 { font-size: 26px; }
-        }
+        .card-img-wrapper { width: 100%; aspect-ratio: 4/5; overflow: hidden; background: #f9f9f9; padding: 15px; }
+        .card-img-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+        .card-info { padding: 20px; border-top: 1px solid #f9f9f9; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 16px; color: #111; font-weight: 700; margin-bottom: 5px; }
+        .card-color { font-size: 13px; color: #888; margin-bottom: 12px; }
+        .card-price-container { display: flex; align-items: baseline; gap: 10px; margin-top: auto; margin-bottom: 15px; }
+        .card-price { font-size: 22px; color: #d32f2f; font-weight: 800; }
+        .card-old-price { font-size: 15px; color: #999; text-decoration: line-through; }
+        .card-btn { background: #111; color: #fff; text-align: center; padding: 12px; border-radius: 6px; font-weight: 700; text-transform: uppercase; font-size: 13px; }
+        @media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; } }
     </style>
 </head>
 <body>
     <header>PARA <span>footwear</span></header>
-    
-    <div class="hero">
-        <h1>Каталог</h1>
-    </div>
-
+    <div class="hero"><h1>Офіційний каталог</h1></div>
     <div class="catalog-container">
-        <div class="grid">
-            <a href="mocasins352/?v=1" class="card" data-folder="mocasins352">
-                <div class="card-img-wrapper">
-                    <img src="mocasins352/latte_1.jpg" class="img-primary" alt="Літні чоловічі мокасини (з перфорацією)" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="mocasins352/latte_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Літні чоловічі мокасини (з перфорацією)</div>
-                    <div class="card-color">Колір: Латте (нубук) NL352L</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="mocasins352/?v=2" class="card" data-folder="mocasins352">
-                <div class="card-img-wrapper">
-                    <img src="mocasins352/blue_1.jpg" class="img-primary" alt="Літні чоловічі мокасини (з перфорацією)" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="mocasins352/blue_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Літні чоловічі мокасини (з перфорацією)</div>
-                    <div class="card-color">Колір: Синя замша NL352zsib</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="mocasins352/?v=3" class="card" data-folder="mocasins352">
-                <div class="card-img-wrapper">
-                    <img src="mocasins352/gray_1.jpg" class="img-primary" alt="Літні чоловічі мокасини (з перфорацією)" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="mocasins352/gray_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Літні чоловічі мокасини (з перфорацією)</div>
-                    <div class="card-color">Колір: Сіра замша NL352gz</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="mocasins352/?v=4" class="card" data-folder="mocasins352">
-                <div class="card-img-wrapper">
-                    <img src="mocasins352/brown_1.jpg" class="img-primary" alt="Літні чоловічі мокасини (з перфорацією)" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="mocasins352/brown_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Літні чоловічі мокасини (з перфорацією)</div>
-                    <div class="card-color">Колір: Коричнева замша NL352zbr</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="mocasins352/?v=5" class="card" data-folder="mocasins352">
-                <div class="card-img-wrapper">
-                    <img src="mocasins352/black_1.jpg" class="img-primary" alt="Літні чоловічі мокасини (з перфорацією)" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="mocasins352/black_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Літні чоловічі мокасини (з перфорацією)</div>
-                    <div class="card-color">Колір: Чорна шкіра NL352f</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="mocasins352/?v=6" class="card" data-folder="mocasins352">
-                <div class="card-img-wrapper">
-                    <img src="mocasins352/black_smooth_1.jpg" class="img-primary" alt="Літні чоловічі мокасини (з перфорацією)" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="mocasins352/black_smooth_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Літні чоловічі мокасини (з перфорацією)</div>
-                    <div class="card-color">Колір: Чорна гладка шкіра NL352</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="mocasins352/?v=7" class="card" data-folder="mocasins352">
-                <div class="card-img-wrapper">
-                    <img src="mocasins352/ivory_1.jpg" class="img-primary" alt="Літні чоловічі мокасини (з перфорацією)" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="mocasins352/ivory_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Літні чоловічі мокасини (з перфорацією)</div>
-                    <div class="card-color">Колір: Слонова кістка NL352w</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="mocasins352/?v=8" class="card" data-folder="mocasins352">
-                <div class="card-img-wrapper">
-                    <img src="mocasins352/DSC_0365.jpg" class="img-primary" alt="Літні чоловічі мокасини (з перфорацією)" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="mocasins352/DSC_0358.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Літні чоловічі мокасини (з перфорацією)</div>
-                    <div class="card-color">Колір: Чорний нубук NL352N</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="319/?v=1" class="card" data-folder="319">
-                <div class="card-img-wrapper">
-                    <img src="319/319l (4).jpg" class="img-primary" alt="Чоловічі кеди за натуральної шкіри" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="319/319l (5).jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Чоловічі кеди за натуральної шкіри</div>
-                    <div class="card-color">Колір: Нубук (лате) 319L</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="319/?v=2" class="card" data-folder="319">
-                <div class="card-img-wrapper">
-                    <img src="319/319sh (1).jpg" class="img-primary" alt="Чоловічі кеди за натуральної шкіри" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="319/319sh (2).jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Чоловічі кеди за натуральної шкіри</div>
-                    <div class="card-color">Колір: Чорна матова шкіра 319sh</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="319/?v=3" class="card" data-folder="319">
-                <div class="card-img-wrapper">
-                    <img src="319/319gz (3).jpg" class="img-primary" alt="Чоловічі кеди за натуральної шкіри" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="319/319gz (4).jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Чоловічі кеди за натуральної шкіри</div>
-                    <div class="card-color">Колір: Сіра замша с чорною підошвою 319gzb</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="319/?v=4" class="card" data-folder="319">
-                <div class="card-img-wrapper">
-                    <img src="319/319gzw (1).jpg" class="img-primary" alt="Чоловічі кеди за натуральної шкіри" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="319/319gzw (2).jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Чоловічі кеди за натуральної шкіри</div>
-                    <div class="card-color">Колір: Сіра замша с білою підошвою 319gzw</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="319/?v=5" class="card" data-folder="319">
-                <div class="card-img-wrapper">
-                    <img src="319/319f (1).jpg" class="img-primary" alt="Чоловічі кеди за натуральної шкіри" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="319/319f (2).jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Чоловічі кеди за натуральної шкіри</div>
-                    <div class="card-color">Колір: Чорна шкіра 319f</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="319/?v=6" class="card" data-folder="319">
-                <div class="card-img-wrapper">
-                    <img src="319/319zbr (1).jpg" class="img-primary" alt="Чоловічі кеди за натуральної шкіри" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="319/319zbr (2).jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Чоловічі кеди за натуральної шкіри</div>
-                    <div class="card-color">Колір: Коричнева замша 319zbr</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="N342/?v=1" class="card" data-folder="N342">
-                <div class="card-img-wrapper">
-                    <img src="N342/black_smooth_1.jpg" class="img-primary" alt="Туфлі Braxton з натуральної шкіри та замші" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N342/black_smooth_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Туфлі Braxton з натуральної шкіри та замші</div>
-                    <div class="card-color">Колір: Чорна гладка шкіра N342</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="N342/?v=2" class="card" data-folder="N342">
-                <div class="card-img-wrapper">
-                    <img src="N342/black_suede_1.jpg" class="img-primary" alt="Туфлі Braxton з натуральної шкіри та замші" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N342/black_suede_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Туфлі Braxton з натуральної шкіри та замші</div>
-                    <div class="card-color">Колір: Чорна замша N342z</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="N342/?v=3" class="card" data-folder="N342">
-                <div class="card-img-wrapper">
-                    <img src="N342/brown_black_1.jpg" class="img-primary" alt="Туфлі Braxton з натуральної шкіри та замші" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N342/brown_black_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Туфлі Braxton з натуральної шкіри та замші</div>
-                    <div class="card-color">Колір: Коричнева замша з чорною підошвою N342zbrb</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="N342/?v=4" class="card" data-folder="N342">
-                <div class="card-img-wrapper">
-                    <img src="N342/brown_1.jpg" class="img-primary" alt="Туфлі Braxton з натуральної шкіри та замші" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N342/brown_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Туфлі Braxton з натуральної шкіри та замші</div>
-                    <div class="card-color">Колір: Коричнева замша з білою підошвою N342zbr</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="N342/?v=5" class="card" data-folder="N342">
-                <div class="card-img-wrapper">
-                    <img src="N342/blue_black_1.jpg" class="img-primary" alt="Туфлі Braxton з натуральної шкіри та замші" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N342/blue_black_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Туфлі Braxton з натуральної шкіри та замші</div>
-                    <div class="card-color">Колір: Синя замша з чорною підошвою N342zsibb</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="N342/?v=6" class="card" data-folder="N342">
-                <div class="card-img-wrapper">
-                    <img src="N342/blue_1.jpg" class="img-primary" alt="Туфлі Braxton з натуральної шкіри та замші" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N342/blue_2.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Туфлі Braxton з натуральної шкіри та замші</div>
-                    <div class="card-color">Колір: Синя замша з білою підошвою N342zsib</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="N352/?v=1" class="card" data-folder="N352">
-                <div class="card-img-wrapper">
-                    <img src="N352/20250815_1001341.jpg" class="img-primary" alt="Демісезонні чоловічі мокасини" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N352/20250815_0959391.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Демісезонні чоловічі мокасини</div>
-                    <div class="card-color">Колір: Лате (замша) N352zL</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="N352/?v=2" class="card" data-folder="N352">
-                <div class="card-img-wrapper">
-                    <img src="N352/20250803_121005.jpg" class="img-primary" alt="Демісезонні чоловічі мокасини" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N352/20250803_121451.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Демісезонні чоловічі мокасини</div>
-                    <div class="card-color">Колір: Коричнева замша N352zbr</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="N352/?v=3" class="card" data-folder="N352">
-                <div class="card-img-wrapper">
-                    <img src="N352/20250815_101839.jpg" class="img-primary" alt="Демісезонні чоловічі мокасини" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N352/20250815_102213.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Демісезонні чоловічі мокасини</div>
-                    <div class="card-color">Колір: Чорна шкіра N352f</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="N352/?v=4" class="card" data-folder="N352">
-                <div class="card-img-wrapper">
-                    <img src="N352/DSC_0350.jpg" class="img-primary" alt="Демісезонні чоловічі мокасини" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N352/DSC_0351.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Демісезонні чоловічі мокасини</div>
-                    <div class="card-color">Колір: Чорна замша N352z</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a>
-            <a href="N344/?v=1" class="card" data-folder="N344">
-                <div class="card-img-wrapper">
-                    <img src="N344/DSC_0333.jpg" class="img-primary" alt="Туфлі Braxton з натуральної шкіри та замші" onerror="this.src='https://via.placeholder.com/400x500?text=PARA'">
-                    <img src="N344/DSC_0334.jpg" class="img-secondary" alt="" onerror="this.previousElementSibling.classList.add('keep-visible'); this.remove();">
-                </div>
-                <div class="card-info">
-                    <div class="card-title">Туфлі Braxton з натуральної шкіри та замші</div>
-                    <div class="card-color">Колір: Чорна замша N344zb</div>
-                    <div class="card-price-container loading-price"></div>
-                    <div class="card-btn">Детальніше</div>
-                </div>
-            </a></div>
+        <div class="grid"></div>
     </div>
-
-    <section class="about-section">
-        <div class="about-inner">
-            <h2>ПРО КОМПАНІЮ</h2>
-            <p class="about-main-text">PARA — взуття, розраховане на роки. Ми особисто відбираємо найкращі моделі від українських виробників, які проходять жорстку перевірку на якість та міцність.</p>
-            
-            <div class="features-grid">
-                <div class="feature-item">
-                    <h3>100% Натуральність</h3>
-                    <p>Тільки шкіра, нубук та замша. Жодного пластику чи замінників — вони просто не витримують реальних навантажень так, як натуральний матеріал.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Витривалість</h3>
-                    <p>Поки мас-маркет втрачає вигляд за сезон, наше взуття служить роками. Це робота українських майстрів із запасом міцності, що значно випереджає стандарти популярних брендів.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Раціональний вибір</h3>
-                    <p>Найкращий внесок в екологію — це річ, яку не доведеться викидати за рік. Якісна шкіра — це інвестиція у довговічність, а не в одноразові речі.</p>
-                </div>
-            </div>
-
-            <div class="about-footer">PARA — фокус на справжньому.</div>
-        </div>
-    </section>
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const priceCache = {};
@@ -407,32 +43,22 @@
                 const folder = card.getAttribute('data-folder');
                 const targetUrl = folder + '/index.html';
                 const priceContainer = card.querySelector('.card-price-container');
-                
-                if (priceCache[folder]) { 
-                    applyPrice(priceContainer, priceCache[folder].newP, priceCache[folder].oldP); 
-                    return; 
-                }
-                
+                if (priceCache[folder]) { applyPrice(priceContainer, priceCache[folder].newP, priceCache[folder].oldP); return; }
                 fetch(targetUrl).then(res => res.text()).then(html => {
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(html, 'text/html');
                     const fetchedPriceEl = doc.querySelector('.price-new') || doc.querySelector('.st-new');
                     const fetchedOldPriceEl = doc.querySelector('.price-old') || doc.querySelector('.st-old');
-                    
                     if (fetchedPriceEl) {
                         const newP = fetchedPriceEl.textContent;
                         const oldP = fetchedOldPriceEl ? fetchedOldPriceEl.textContent : '';
                         priceCache[folder] = { newP, oldP };
                         applyPrice(priceContainer, newP, oldP);
                     }
-                }).catch(() => {
-                    priceContainer.classList.remove('loading-price');
                 });
             });
-
             function applyPrice(container, newPrice, oldPrice) {
                 container.innerHTML = (oldPrice ? '<span class="card-old-price">'+oldPrice+'</span>' : '') + '<span class="card-price">'+newPrice+'</span>';
-                container.classList.remove('loading-price');
             }
         });
     </script>
